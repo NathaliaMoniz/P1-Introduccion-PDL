@@ -1,0 +1,7 @@
+{
+    "Hola mundo" >= 6e2 == TR:
+        "Adios"
+    0b1000100010 == 064:
+        _Que_tal
+    ""
+}
