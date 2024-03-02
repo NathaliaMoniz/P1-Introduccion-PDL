@@ -1,7 +1,14 @@
 {
-    "Hola mundo" >= 6e2 == TR:
-        "Adios"
-    0b1000100010 == 064:
-        _Que_tal
-    ""
+    "Hola mundo" : 100,
+    hola : 2,
+    "gigo": {
+        
+        yi : 2 <= 123
+        
+    },
+    kilo : NULL,
+    _Que_tal : TR,
+    vei20 : 15 < 100,
+    sii : "TU",
+    "hjsd": fl
 }

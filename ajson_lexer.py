@@ -1,12 +1,12 @@
 import sys
 import ply.lex as lex
-
+import ply.yacc as yacc
 """ Reconocedor léxico. """
 # Palabras reservadas
 reserved = (
-    "NULL", "null",
-    "TR", "tr", 
-    "FL", "fl"
+    "NULL",
+    "TR", 
+    "FL"
 )
 
 # Tokens
@@ -28,9 +28,15 @@ tokens = (
     "LLAVEC",
     "PUNTOS",
     "COMA",
-    "NULO",
-    "BOOL"
 ) + reserved
+
+reserved_map = {}
+for r in reserved:
+    reserved_map[r.lower()] = r
+    reserved_map[r.upper()] = r
+    
+# Ignorar espacios, tabulaciones y saltos de línea
+t_ignore = " \t\n"
 
 # Expresiones regulares
 t_EQ = r'=='
@@ -42,7 +48,7 @@ t_LLAVEA = r'\{'
 t_LLAVEC = r'\}'
 t_PUNTOS = r':'
 t_COMA = r','
-t_CADENASIN = r'[A-Z_][A-Za-z0-9_]*'
+
 
 def t_REAL(t):
     r'-?\d*\.\d+'
@@ -79,18 +85,10 @@ def t_CADENACON(t):
     t.value = t.value[1:-1]
     return t
 
-def t_NULO(t):
-    r'NULL|null'
-    t.type = "NULO"
+def t_CADENASIN(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t.type = reserved_map.get(t.value, "CADENASIN")
     return t
-
-def t_BOOL(t):
-    r'FL|fl|TR|tr'
-    t.type = "BOOL"
-    return t
-
-# Ignorar espacios, tabulaciones y saltos de línea
-t_ignore = " \t\n"
 
 # Manejo de errores
 def t_error(token):
@@ -103,7 +101,72 @@ def t_newline(t):
 
 """Leer el fichero de entrada y ejecutar el analizador."""
 lexer = lex.lex()
-file = open(sys.argv[1], "r")
+"""file = open(sys.argv[1], "r")
 lexer.input(file.read())
 for token in lexer:
     print(token.type, token.value)
+"""
+
+"""
+Simbolos terminales: INT REAL NCIENT BIN OCT HEX == >= <= > < : , ¿...??
+Simbolos no terminales: axioma asignacion
+
+"""
+
+start = 'axioma'
+
+def p_axioma(p):
+    ''' axioma : LLAVEA contenido LLAVEC 
+               | LLAVEA LLAVEC'''
+    print("Axioma: ", p[1], p[2],p[3])
+
+def p_contenido(p): 
+    ''' contenido : asignacion
+                 |  asignacion COMA contenido '''
+    print(p[1])
+
+
+def p_asignacion(p):
+    ''' asignacion : CADENACON PUNTOS valor
+                   | CADENASIN PUNTOS valor
+                   | CADENASIN PUNTOS axioma '''
+
+def p_valor(p):
+    ''' valor : numero
+              | comparacion
+              | NULL
+              | TR
+              | FL
+              | CADENACON 
+              | axioma'''
+
+def p_numero(p):
+    '''numero : INT
+              | REAL
+              | NCIENT
+              | BIN
+              | OCT
+              | HEX '''
+
+
+
+def p_comparacion(p):
+    ''' comparacion : numero LT numero
+                    | numero GT numero
+                    | numero EQ numero
+                    | numero LE numero
+                    | numero GE numero '''
+
+def p_error(p):
+    if p.value: 
+        # El error es por el valor que no es correcto.
+        print("[Syntax Error] At value ", p.value)
+    else: 
+        # El error es por la cadena que es incompleta o no correcta.
+        print("[Syntax Error] EOF")
+
+# Constructor del parser
+parser = yacc.yacc()
+file = open(sys.argv[1], "r")
+content = file.read()
+parser.parse(content)
