@@ -113,29 +113,42 @@ Simbolos no terminales: axioma asignacion
 
 """
 
-start = 'axioma'
+
 
 def p_axioma(p):
     ''' axioma : LLAVEA contenido LLAVEC 
                | LLAVEA LLAVEC'''
     
     if len(p) == 4:
-        p[0] =p[2]
-    else:
-        p[0] = None
-    print(p[0])
+        p[0] = p[2]
+        print(p[1], p[2], p[3])
+    elif(len(p)==3):
+        p[0] = p[1] + p[2]
+        print(None)
+    
+        
+    
 
 def p_contenido(p): 
     ''' contenido : asignacion
                  |  asignacion COMA contenido '''
-    print(p[1])
-    p[0] = p[1]
+    
+    if(len(p) == 2):
+
+        p[0] = p[1]
+
+    elif(len(p) == 4):
+        p[0] =  p[1] + p[2] + p[3]
 
 
 def p_asignacion(p):
     ''' asignacion : CADENACON PUNTOS valor
                    | CADENASIN PUNTOS valor
                    | CADENASIN PUNTOS axioma '''
+    if len(p) == 4:
+        p[0] = p[1] + p[2] + str(p[3])
+    else:
+        p[0] = p[1] + p[2] + p[3]
 
 def p_valor(p):
     ''' valor : numero
@@ -145,6 +158,7 @@ def p_valor(p):
               | FL
               | CADENACON 
               | axioma'''
+    p[0] = p[1]
 
 def p_numero(p):
     '''numero : INT
@@ -153,6 +167,7 @@ def p_numero(p):
               | BIN
               | OCT
               | HEX '''
+    p[0] = p[1]
 
 
 
@@ -162,6 +177,8 @@ def p_comparacion(p):
                     | numero EQ numero
                     | numero LE numero
                     | numero GE numero '''
+    p[0] = str(p[1]) + p[2] + str(p[3])
+    
 
 def p_error(p):
     if p.value: 
