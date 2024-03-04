@@ -118,12 +118,18 @@ start = 'axioma'
 def p_axioma(p):
     ''' axioma : LLAVEA contenido LLAVEC 
                | LLAVEA LLAVEC'''
-    print("Axioma: ", p[1], p[2],p[3])
+    
+    if len(p) == 4:
+        p[0] =p[2]
+    else:
+        p[0] = None
+    print(p[0])
 
 def p_contenido(p): 
     ''' contenido : asignacion
                  |  asignacion COMA contenido '''
     print(p[1])
+    p[0] = p[1]
 
 
 def p_asignacion(p):
