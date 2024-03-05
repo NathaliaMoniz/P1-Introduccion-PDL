@@ -2,9 +2,7 @@
     "Hola mundo" : {},
     hola : 2,
     "gigo": {
-        
-        yi : 2 <= 123
-        
+            "clave_vacia" : ""
     },
     kilo : NULL,
     _Que_tal : TR,
