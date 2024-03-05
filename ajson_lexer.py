@@ -126,9 +126,6 @@ def p_axioma(p):
         p[0] = p[1] + p[2]
         print(None)
     
-        
-    
-
 def p_contenido(p): 
     ''' contenido : asignacion
                  |  asignacion COMA contenido '''
