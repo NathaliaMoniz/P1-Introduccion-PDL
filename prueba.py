@@ -9,40 +9,40 @@ class ParserClass:
     def __init__(self):
         self.parser = yacc.yacc(module=self)
         self.lexer = LexerClass().lexer
-        self.contenido = ""
+        self.contenido = None
 
     def p_axioma(self, p):
         ''' axioma : LLAVEA contenido LLAVEC 
                    | LLAVEA LLAVEC'''
-    
+
         if len(p) == 4:
-            p[0] = str(p[1]) + str(p[2]) + str(p[3])
-        elif(len(p)==3):
-            p[0] = p[1] + p[2]            
+            p[0] = p[2]
+        
+        else:
+            p[0] = None
+
+        self.contenido = p[0]
+    
+                     
         
     def p_contenido(self, p): 
         ''' contenido : asignacion
                       | asignacion COMA
                       | asignacion COMA contenido '''
-        
-        if(len(p) == 2):
+        if len(p) == 2:
             p[0] = p[1]
-        elif(len(p) == 4):
-            p[0] =  p[1] + p[2] + p[3]
+        elif len(p) == 3:
+            p[0] = p[1]
+        elif len(p) == 4:
+            p[0] = p[1] + p[3]
+        
 
     def p_asignacion(self, p):
         ''' asignacion : CADENACON PUNTOS valor
                        | CADENASIN PUNTOS valor
                        | CADENASIN PUNTOS axioma '''
+        p[0] = str({p[1] : p[3]})
         
-        p[0] = p[1] + p[2] + str(p[3])
-        if str(p[3]) == "{}":
-            #print(p[1] + ":" + str(None))
-            p[0] = p[1] + ":" + str(None)
-        else:
-            #print(p[1] + ":" + str(p[3]))
-            p[0] = p[1] + ":" + str(p[3])
-        self.contenido += "{" + p[0] + "}"
 
     def p_valor(self, p):
         ''' valor : numero
@@ -52,14 +52,8 @@ class ParserClass:
                 | FL
                 | CADENACON 
                 | axioma'''
-        
         p[0] = p[1]
-        if p[1] == "NULL":
-            p[0] = None
-        elif p[1] == "TR" or p[1] == "tr":
-            p[0] = True
-        elif p[1] == "FL" or p[1] == "fl":
-            p[0] = False
+       
     
     def p_numero(self, p):
         '''numero : INT
@@ -77,18 +71,17 @@ class ParserClass:
                         | numero EQ numero
                         | numero LE numero
                         | numero GE numero '''
-        
-        p[0] = str(p[1]) + p[2] + str(p[3])
         if p[2] == "<":
-            p[0] = p[1]<p[3]
+            p[0] = (p[1] < p[3])
         elif p[2] == ">":
-            p[0] = p[1]>p[3]
+            p[0] = (p[1] > p[3])
+        elif p[2] == "==":
+            p[0] = (p[1] == p[3])
         elif p[2] == "<=":
-            p[0] = p[1] <= p[3]    
+            p[0] = (p[1] <= p[3])
         elif p[2] == ">=":
-            p[0] = p[1]>=p[3] 
-        else:
-            p[0] = p[1]==p[3]
+            p[0] = (p[1] >= p[3])
+        
 
     def p_error(self, p):
         if p.value: 
@@ -105,12 +98,13 @@ class ParserClass:
         file = open(path)
         content = file.read()  
         self.test(content)
-        self.imprimir()
+        print(self.contenido)
+        """self.imprimir()"""
 
-    def imprimir(self):
+    """def imprimir(self):
         if self.contenido == "":
             print('FICHERO AJSON VACÍO "' + sys.argv[1] + '"')
             return
         print('FICHERO AJSON "' + sys.argv[1] + '"')
-        print(self.contenido)
+        print(self.contenido)"""
 
