@@ -1,3 +1,4 @@
+import sys
 import ply.yacc as yacc
 from ajson_lexer import LexerClass
 
@@ -8,25 +9,21 @@ class ParserClass:
     def __init__(self):
         self.parser = yacc.yacc(module=self)
         self.lexer = LexerClass().lexer
-        self.anidado = False
+        self.contenido = ""
 
     def p_axioma(self, p):
         ''' axioma : LLAVEA contenido LLAVEC 
-                | LLAVEA LLAVEC'''
+                   | LLAVEA LLAVEC'''
     
         if len(p) == 4:
-            p[0] = p[2]
+            p[0] = str(p[1]) + str(p[2]) + str(p[3])
         elif(len(p)==3):
-            p[0] = p[1] + p[2]
-        if p[0] == None:
-            print("entro")
-            self.anidado = True
-            
+            p[0] = p[1] + p[2]            
         
     def p_contenido(self, p): 
         ''' contenido : asignacion
-                    | asignacion COMA
-                    | asignacion COMA contenido '''
+                      | asignacion COMA
+                      | asignacion COMA contenido '''
         
         if(len(p) == 2):
             p[0] = p[1]
@@ -35,18 +32,17 @@ class ParserClass:
 
     def p_asignacion(self, p):
         ''' asignacion : CADENACON PUNTOS valor
-                    | CADENASIN PUNTOS valor
-                    | CADENASIN PUNTOS axioma '''
+                       | CADENASIN PUNTOS valor
+                       | CADENASIN PUNTOS axioma '''
         
         p[0] = p[1] + p[2] + str(p[3])
         if str(p[3]) == "{}":
-            print(p[1] + ":" + str(None))
-        elif self.anidado:
-            print("entre")
-            print(p[1] + "." + str(p[3]))
-            self.anidado = False
+            #print(p[1] + ":" + str(None))
+            p[0] = p[1] + ":" + str(None)
         else:
-            print(p[1] + ":" + str(p[3]))
+            #print(p[1] + ":" + str(p[3]))
+            p[0] = p[1] + ":" + str(p[3])
+        self.contenido += "{" + p[0] + "}"
 
     def p_valor(self, p):
         ''' valor : numero
@@ -67,11 +63,11 @@ class ParserClass:
     
     def p_numero(self, p):
         '''numero : INT
-                | REAL
-                | NCIENT
-                | BIN
+                | REAL
+                | NCIENT
+                | BIN
                 | OCT
-                | HEX '''
+                | HEX '''
         
         p[0] = p[1]
 
@@ -109,4 +105,12 @@ class ParserClass:
         file = open(path)
         content = file.read()  
         self.test(content)
+        self.imprimir()
+
+    def imprimir(self):
+        if self.contenido == "":
+            print('FICHERO AJSON VACÍO "' + sys.argv[1] + '"')
+            return
+        print('FICHERO AJSON "' + sys.argv[1] + '"')
+        print(self.contenido)
 

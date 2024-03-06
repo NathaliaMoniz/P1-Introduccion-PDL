@@ -2,9 +2,8 @@ import sys
 import ply.lex as lex
 import ply.yacc as yacc
 
+""" Reconocedor léxico. """
 class LexerClass:
-
-    """ Reconocedor léxico. """
     # Palabras reservadas
     reserved = (
         "NULL",
@@ -56,7 +55,6 @@ class LexerClass:
     t_PUNTOS = r':'
     t_COMA = r','
 
-
     def t_REAL(self, t):
         r'-?\d*\.\d+'
         t.value = float(t.value)
@@ -97,21 +95,18 @@ class LexerClass:
         t.type = self.reserved_map.get(t.value, "CADENASIN")
         return t
 
-    # Manejo de errores
     def t_error(self, token):
         print("Caracter ilegal", token.value)
         token.lexer.skip(1)
-
-    
 
     def test(self, data):
         self.lexer.input(data)
         for token in self.lexer:
             print(token.type, token.value)
-        
     
     def test_with_files(self, path):
         file = open(path)
         content = file.readlines()
         for line in content:
             self.test(line)
+
