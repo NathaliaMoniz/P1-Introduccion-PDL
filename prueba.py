@@ -2,7 +2,6 @@ import sys
 import ply.yacc as yacc
 from ajson_lexer import LexerClass
 
-""" Reconocedor sintáctico. """
 class ParserClass:
     tokens = LexerClass.tokens
     
@@ -19,11 +18,10 @@ class ParserClass:
             p[0] = p[2]
         
         else:
-            p[0] = None
+            p[0] = {}
 
         self.contenido = p[0]
-                       
-        
+    
     def p_contenido(self, p): 
         ''' contenido : asignacion
                       | asignacion COMA
@@ -33,14 +31,15 @@ class ParserClass:
         elif len(p) == 3:
             p[0] = p[1]
         elif len(p) == 4:
-            p[0] = p[1] + p[3]
+            # unión de diccionarios
+            p[0] = {**p[1], **p[3]}
         
 
     def p_asignacion(self, p):
         ''' asignacion : CADENACON PUNTOS valor
                        | CADENASIN PUNTOS valor
                        | CADENASIN PUNTOS axioma '''
-        p[0] = str({p[1] : p[3]})
+        p[0] = {p[1] : p[3]}
         
 
     def p_valor(self, p):
@@ -84,59 +83,33 @@ class ParserClass:
 
     def p_error(self, p):
         if p.value: 
-            # El error es por el valor que no es correcto.
             print("[Syntax Error] At value ", p.value)
         else: 
-            # El error es por la cadena que es incompleta o no correcta.
             print("[Syntax Error] EOF")
     
     def test(self, data):
         self.parser.parse(data)
     
+    def imprimir_anidado(self, dic, clave_previa=''):
+        for clave, valor in dic.items():
+            if clave_previa:
+                nueva_clave = clave_previa + '.' + clave
+            else:
+                nueva_clave = clave
+            if isinstance(valor, dict):
+                self.imprimir_anidado(valor, nueva_clave)
+            else:
+                print(f'{{ {nueva_clave}:  {valor} }}')
+
+    def imprimir(self, filename):
+        print(f'FICHERO AJSON "{filename}"')
+        self.imprimir_anidado(self.contenido)
+
     def test_with_files(self, path):
         file = open(path)
         content = file.read()  
         self.test(content)
-        # print(self.contenido)
-        self.imprimir()
-
-    """def imprimir(self):
-        if self.contenido == "":
-            print('FICHERO AJSON VACÍO "' + sys.argv[1] + '"')
-            return
-        print('FICHERO AJSON "' + sys.argv[1] + '"')
-        print(self.contenido)"""
+        self.imprimir(path)    
     
-    def imprimir(self):
-        if self.contenido == None:
-            print('FICHERO AJSON VACÍO "' + sys.argv[1] + '"')
-            return
-        else:
-            print('FICHERO AJSON "' + sys.argv[1] + '"')
-            salida = ""
-            for item in self.contenido.split("}{"):
 
-                item = item.strip("{}")
-
-                item = item.replace("'", '')
-
-                item = item.replace(':', ': ')
-
-                item = item.replace('TR', 'True').replace('FL', 'False')
-
-                item = item.replace('NULL', 'None')
-
-                item = item.replace('"', '')
-
-                item = item.replace(', ', ',')
-                if ':  {' in item:
-                    key, nested_item = item.split(':  {')
-                    nested_key, nested_value = nested_item.split(': ')
-                    item = '{ ' + key + '.' + nested_key + ': ' + nested_value.replace(' }', '') 
-                else:
-
-                    item = '{ ' + item + ' }'
-                
-                salida += item + '\n'
-        print (salida)
 

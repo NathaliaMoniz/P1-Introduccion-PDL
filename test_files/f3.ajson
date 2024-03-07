@@ -6,6 +6,11 @@
     clave_valor_nulo: NULL,
     clave_op_comp: 10 > 11,
     camilo_triana: {
-        "peras con mani" : 2 < 3,
-    }
+        peras_con_mani: {
+            jkoj: {
+                skjfd: 34,
+            },
+        },
+    },
+    hkj: 45
 }
