@@ -5,7 +5,7 @@
     clave_booleano: TR,
     clave_valor_nulo: NULL,
     clave_op_comp: 10 > 11,
-    clave_anidada: {
-        "clave con comillas" : " ",
+    camilo_triana: {
+        "peras con mani" : 2 < 3,
     }
 }

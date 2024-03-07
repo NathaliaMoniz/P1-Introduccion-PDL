@@ -98,8 +98,8 @@ class ParserClass:
         file = open(path)
         content = file.read()  
         self.test(content)
-        print(self.contenido)
-        """self.imprimir()"""
+        # print(self.contenido)
+        self.imprimir()
 
     """def imprimir(self):
         if self.contenido == "":
@@ -107,4 +107,37 @@ class ParserClass:
             return
         print('FICHERO AJSON "' + sys.argv[1] + '"')
         print(self.contenido)"""
+    
+    def imprimir(self):
+        if self.contenido == None:
+            print('FICHERO AJSON VACÍO "' + sys.argv[1] + '"')
+            return
+        else:
+            print('FICHERO AJSON "' + sys.argv[1] + '"')
+            salida = ""
+            for item in self.contenido.split("}{"):
+
+                item = item.strip("{}")
+
+                item = item.replace("'", '')
+
+                item = item.replace(':', ': ')
+
+                item = item.replace('TR', 'True').replace('FL', 'False')
+
+                item = item.replace('NULL', 'None')
+
+                item = item.replace('"', '')
+
+                item = item.replace(', ', ',')
+                if ':  {' in item:
+                    key, nested_item = item.split(':  {')
+                    nested_key, nested_value = nested_item.split(': ')
+                    item = '{ ' + key + '.' + nested_key + ': ' + nested_value.replace(' }', '') 
+                else:
+
+                    item = '{ ' + item + ' }'
+                
+                salida += item + '\n'
+        print (salida)
 
