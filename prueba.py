@@ -22,8 +22,7 @@ class ParserClass:
             p[0] = None
 
         self.contenido = p[0]
-    
-                     
+                       
         
     def p_contenido(self, p): 
         ''' contenido : asignacion
