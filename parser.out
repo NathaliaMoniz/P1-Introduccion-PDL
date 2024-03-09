@@ -10,57 +10,56 @@ Rule 4     contenido -> asignacion COMA
 Rule 5     contenido -> asignacion COMA contenido
 Rule 6     asignacion -> CADENACON PUNTOS valor
 Rule 7     asignacion -> CADENASIN PUNTOS valor
-Rule 8     asignacion -> CADENASIN PUNTOS axioma
-Rule 9     valor -> numero
-Rule 10    valor -> comparacion
-Rule 11    valor -> NULL
-Rule 12    valor -> TR
-Rule 13    valor -> FL
-Rule 14    valor -> CADENACON
-Rule 15    valor -> axioma
-Rule 16    numero -> INT
-Rule 17    numero -> REAL
-Rule 18    numero -> NCIENT
-Rule 19    numero -> BIN
-Rule 20    numero -> OCT
-Rule 21    numero -> HEX
-Rule 22    comparacion -> numero LT numero
-Rule 23    comparacion -> numero GT numero
-Rule 24    comparacion -> numero EQ numero
-Rule 25    comparacion -> numero LE numero
-Rule 26    comparacion -> numero GE numero
+Rule 8     valor -> numero
+Rule 9     valor -> comparacion
+Rule 10    valor -> NULL
+Rule 11    valor -> TR
+Rule 12    valor -> FL
+Rule 13    valor -> CADENACON
+Rule 14    valor -> axioma
+Rule 15    numero -> INT
+Rule 16    numero -> REAL
+Rule 17    numero -> NCIENT
+Rule 18    numero -> BIN
+Rule 19    numero -> OCT
+Rule 20    numero -> HEX
+Rule 21    comparacion -> numero LT numero
+Rule 22    comparacion -> numero GT numero
+Rule 23    comparacion -> numero EQ numero
+Rule 24    comparacion -> numero LE numero
+Rule 25    comparacion -> numero GE numero
 
 Terminals, with rules where they appear
 
-BIN                  : 19
-CADENACON            : 6 14
-CADENASIN            : 7 8
+BIN                  : 18
+CADENACON            : 6 13
+CADENASIN            : 7
 COMA                 : 4 5
-EQ                   : 24
-FL                   : 13
-GE                   : 26
-GT                   : 23
-HEX                  : 21
-INT                  : 16
-LE                   : 25
+EQ                   : 23
+FL                   : 12
+GE                   : 25
+GT                   : 22
+HEX                  : 20
+INT                  : 15
+LE                   : 24
 LLAVEA               : 1 2
 LLAVEC               : 1 2
-LT                   : 22
-NCIENT               : 18
-NULL                 : 11
-OCT                  : 20
-PUNTOS               : 6 7 8
-REAL                 : 17
-TR                   : 12
+LT                   : 21
+NCIENT               : 17
+NULL                 : 10
+OCT                  : 19
+PUNTOS               : 6 7
+REAL                 : 16
+TR                   : 11
 error                : 
 
 Nonterminals, with rules where they appear
 
 asignacion           : 3 4 5
-axioma               : 8 15 0
-comparacion          : 10
+axioma               : 14 0
+comparacion          : 9
 contenido            : 1 5
-numero               : 9 22 22 23 23 24 24 25 25 26 26
+numero               : 8 21 21 22 22 23 23 24 24 25 25
 valor                : 6 7
 
 Parsing method: LALR
@@ -90,7 +89,6 @@ state 2
     (5) contenido -> . asignacion COMA contenido
     (6) asignacion -> . CADENACON PUNTOS valor
     (7) asignacion -> . CADENASIN PUNTOS valor
-    (8) asignacion -> . CADENASIN PUNTOS axioma
 
     LLAVEC          shift and go to state 4
     CADENACON       shift and go to state 6
@@ -135,7 +133,6 @@ state 6
 state 7
 
     (7) asignacion -> CADENASIN . PUNTOS valor
-    (8) asignacion -> CADENASIN . PUNTOS axioma
 
     PUNTOS          shift and go to state 11
 
@@ -158,7 +155,6 @@ state 9
     (5) contenido -> . asignacion COMA contenido
     (6) asignacion -> . CADENACON PUNTOS valor
     (7) asignacion -> . CADENASIN PUNTOS valor
-    (8) asignacion -> . CADENASIN PUNTOS axioma
 
     LLAVEC          reduce using rule 4 (contenido -> asignacion COMA .)
     CADENACON       shift and go to state 6
@@ -170,24 +166,24 @@ state 9
 state 10
 
     (6) asignacion -> CADENACON PUNTOS . valor
-    (9) valor -> . numero
-    (10) valor -> . comparacion
-    (11) valor -> . NULL
-    (12) valor -> . TR
-    (13) valor -> . FL
-    (14) valor -> . CADENACON
-    (15) valor -> . axioma
-    (16) numero -> . INT
-    (17) numero -> . REAL
-    (18) numero -> . NCIENT
-    (19) numero -> . BIN
-    (20) numero -> . OCT
-    (21) numero -> . HEX
-    (22) comparacion -> . numero LT numero
-    (23) comparacion -> . numero GT numero
-    (24) comparacion -> . numero EQ numero
-    (25) comparacion -> . numero LE numero
-    (26) comparacion -> . numero GE numero
+    (8) valor -> . numero
+    (9) valor -> . comparacion
+    (10) valor -> . NULL
+    (11) valor -> . TR
+    (12) valor -> . FL
+    (13) valor -> . CADENACON
+    (14) valor -> . axioma
+    (15) numero -> . INT
+    (16) numero -> . REAL
+    (17) numero -> . NCIENT
+    (18) numero -> . BIN
+    (19) numero -> . OCT
+    (20) numero -> . HEX
+    (21) comparacion -> . numero LT numero
+    (22) comparacion -> . numero GT numero
+    (23) comparacion -> . numero EQ numero
+    (24) comparacion -> . numero LE numero
+    (25) comparacion -> . numero GE numero
     (1) axioma -> . LLAVEA contenido LLAVEC
     (2) axioma -> . LLAVEA LLAVEC
 
@@ -211,44 +207,43 @@ state 10
 state 11
 
     (7) asignacion -> CADENASIN PUNTOS . valor
-    (8) asignacion -> CADENASIN PUNTOS . axioma
-    (9) valor -> . numero
-    (10) valor -> . comparacion
-    (11) valor -> . NULL
-    (12) valor -> . TR
-    (13) valor -> . FL
-    (14) valor -> . CADENACON
-    (15) valor -> . axioma
+    (8) valor -> . numero
+    (9) valor -> . comparacion
+    (10) valor -> . NULL
+    (11) valor -> . TR
+    (12) valor -> . FL
+    (13) valor -> . CADENACON
+    (14) valor -> . axioma
+    (15) numero -> . INT
+    (16) numero -> . REAL
+    (17) numero -> . NCIENT
+    (18) numero -> . BIN
+    (19) numero -> . OCT
+    (20) numero -> . HEX
+    (21) comparacion -> . numero LT numero
+    (22) comparacion -> . numero GT numero
+    (23) comparacion -> . numero EQ numero
+    (24) comparacion -> . numero LE numero
+    (25) comparacion -> . numero GE numero
     (1) axioma -> . LLAVEA contenido LLAVEC
     (2) axioma -> . LLAVEA LLAVEC
-    (16) numero -> . INT
-    (17) numero -> . REAL
-    (18) numero -> . NCIENT
-    (19) numero -> . BIN
-    (20) numero -> . OCT
-    (21) numero -> . HEX
-    (22) comparacion -> . numero LT numero
-    (23) comparacion -> . numero GT numero
-    (24) comparacion -> . numero EQ numero
-    (25) comparacion -> . numero LE numero
-    (26) comparacion -> . numero GE numero
 
     NULL            shift and go to state 17
     TR              shift and go to state 18
     FL              shift and go to state 19
     CADENACON       shift and go to state 13
-    LLAVEA          shift and go to state 2
     INT             shift and go to state 21
     REAL            shift and go to state 22
     NCIENT          shift and go to state 23
     BIN             shift and go to state 24
     OCT             shift and go to state 25
     HEX             shift and go to state 26
+    LLAVEA          shift and go to state 2
 
     valor                          shift and go to state 27
-    axioma                         shift and go to state 28
     numero                         shift and go to state 15
     comparacion                    shift and go to state 16
+    axioma                         shift and go to state 20
 
 state 12
 
@@ -259,10 +254,10 @@ state 12
 
 state 13
 
-    (14) valor -> CADENACON .
+    (13) valor -> CADENACON .
 
-    COMA            reduce using rule 14 (valor -> CADENACON .)
-    LLAVEC          reduce using rule 14 (valor -> CADENACON .)
+    COMA            reduce using rule 13 (valor -> CADENACON .)
+    LLAVEC          reduce using rule 13 (valor -> CADENACON .)
 
 
 state 14
@@ -275,138 +270,138 @@ state 14
 
 state 15
 
-    (9) valor -> numero .
-    (22) comparacion -> numero . LT numero
-    (23) comparacion -> numero . GT numero
-    (24) comparacion -> numero . EQ numero
-    (25) comparacion -> numero . LE numero
-    (26) comparacion -> numero . GE numero
+    (8) valor -> numero .
+    (21) comparacion -> numero . LT numero
+    (22) comparacion -> numero . GT numero
+    (23) comparacion -> numero . EQ numero
+    (24) comparacion -> numero . LE numero
+    (25) comparacion -> numero . GE numero
 
-    COMA            reduce using rule 9 (valor -> numero .)
-    LLAVEC          reduce using rule 9 (valor -> numero .)
-    LT              shift and go to state 29
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LE              shift and go to state 32
-    GE              shift and go to state 33
+    COMA            reduce using rule 8 (valor -> numero .)
+    LLAVEC          reduce using rule 8 (valor -> numero .)
+    LT              shift and go to state 28
+    GT              shift and go to state 29
+    EQ              shift and go to state 30
+    LE              shift and go to state 31
+    GE              shift and go to state 32
 
 
 state 16
 
-    (10) valor -> comparacion .
+    (9) valor -> comparacion .
 
-    COMA            reduce using rule 10 (valor -> comparacion .)
-    LLAVEC          reduce using rule 10 (valor -> comparacion .)
+    COMA            reduce using rule 9 (valor -> comparacion .)
+    LLAVEC          reduce using rule 9 (valor -> comparacion .)
 
 
 state 17
 
-    (11) valor -> NULL .
+    (10) valor -> NULL .
 
-    COMA            reduce using rule 11 (valor -> NULL .)
-    LLAVEC          reduce using rule 11 (valor -> NULL .)
+    COMA            reduce using rule 10 (valor -> NULL .)
+    LLAVEC          reduce using rule 10 (valor -> NULL .)
 
 
 state 18
 
-    (12) valor -> TR .
+    (11) valor -> TR .
 
-    COMA            reduce using rule 12 (valor -> TR .)
-    LLAVEC          reduce using rule 12 (valor -> TR .)
+    COMA            reduce using rule 11 (valor -> TR .)
+    LLAVEC          reduce using rule 11 (valor -> TR .)
 
 
 state 19
 
-    (13) valor -> FL .
+    (12) valor -> FL .
 
-    COMA            reduce using rule 13 (valor -> FL .)
-    LLAVEC          reduce using rule 13 (valor -> FL .)
+    COMA            reduce using rule 12 (valor -> FL .)
+    LLAVEC          reduce using rule 12 (valor -> FL .)
 
 
 state 20
 
-    (15) valor -> axioma .
+    (14) valor -> axioma .
 
-    COMA            reduce using rule 15 (valor -> axioma .)
-    LLAVEC          reduce using rule 15 (valor -> axioma .)
+    COMA            reduce using rule 14 (valor -> axioma .)
+    LLAVEC          reduce using rule 14 (valor -> axioma .)
 
 
 state 21
 
-    (16) numero -> INT .
+    (15) numero -> INT .
 
-    LT              reduce using rule 16 (numero -> INT .)
-    GT              reduce using rule 16 (numero -> INT .)
-    EQ              reduce using rule 16 (numero -> INT .)
-    LE              reduce using rule 16 (numero -> INT .)
-    GE              reduce using rule 16 (numero -> INT .)
-    COMA            reduce using rule 16 (numero -> INT .)
-    LLAVEC          reduce using rule 16 (numero -> INT .)
+    LT              reduce using rule 15 (numero -> INT .)
+    GT              reduce using rule 15 (numero -> INT .)
+    EQ              reduce using rule 15 (numero -> INT .)
+    LE              reduce using rule 15 (numero -> INT .)
+    GE              reduce using rule 15 (numero -> INT .)
+    COMA            reduce using rule 15 (numero -> INT .)
+    LLAVEC          reduce using rule 15 (numero -> INT .)
 
 
 state 22
 
-    (17) numero -> REAL .
+    (16) numero -> REAL .
 
-    LT              reduce using rule 17 (numero -> REAL .)
-    GT              reduce using rule 17 (numero -> REAL .)
-    EQ              reduce using rule 17 (numero -> REAL .)
-    LE              reduce using rule 17 (numero -> REAL .)
-    GE              reduce using rule 17 (numero -> REAL .)
-    COMA            reduce using rule 17 (numero -> REAL .)
-    LLAVEC          reduce using rule 17 (numero -> REAL .)
+    LT              reduce using rule 16 (numero -> REAL .)
+    GT              reduce using rule 16 (numero -> REAL .)
+    EQ              reduce using rule 16 (numero -> REAL .)
+    LE              reduce using rule 16 (numero -> REAL .)
+    GE              reduce using rule 16 (numero -> REAL .)
+    COMA            reduce using rule 16 (numero -> REAL .)
+    LLAVEC          reduce using rule 16 (numero -> REAL .)
 
 
 state 23
 
-    (18) numero -> NCIENT .
+    (17) numero -> NCIENT .
 
-    LT              reduce using rule 18 (numero -> NCIENT .)
-    GT              reduce using rule 18 (numero -> NCIENT .)
-    EQ              reduce using rule 18 (numero -> NCIENT .)
-    LE              reduce using rule 18 (numero -> NCIENT .)
-    GE              reduce using rule 18 (numero -> NCIENT .)
-    COMA            reduce using rule 18 (numero -> NCIENT .)
-    LLAVEC          reduce using rule 18 (numero -> NCIENT .)
+    LT              reduce using rule 17 (numero -> NCIENT .)
+    GT              reduce using rule 17 (numero -> NCIENT .)
+    EQ              reduce using rule 17 (numero -> NCIENT .)
+    LE              reduce using rule 17 (numero -> NCIENT .)
+    GE              reduce using rule 17 (numero -> NCIENT .)
+    COMA            reduce using rule 17 (numero -> NCIENT .)
+    LLAVEC          reduce using rule 17 (numero -> NCIENT .)
 
 
 state 24
 
-    (19) numero -> BIN .
+    (18) numero -> BIN .
 
-    LT              reduce using rule 19 (numero -> BIN .)
-    GT              reduce using rule 19 (numero -> BIN .)
-    EQ              reduce using rule 19 (numero -> BIN .)
-    LE              reduce using rule 19 (numero -> BIN .)
-    GE              reduce using rule 19 (numero -> BIN .)
-    COMA            reduce using rule 19 (numero -> BIN .)
-    LLAVEC          reduce using rule 19 (numero -> BIN .)
+    LT              reduce using rule 18 (numero -> BIN .)
+    GT              reduce using rule 18 (numero -> BIN .)
+    EQ              reduce using rule 18 (numero -> BIN .)
+    LE              reduce using rule 18 (numero -> BIN .)
+    GE              reduce using rule 18 (numero -> BIN .)
+    COMA            reduce using rule 18 (numero -> BIN .)
+    LLAVEC          reduce using rule 18 (numero -> BIN .)
 
 
 state 25
 
-    (20) numero -> OCT .
+    (19) numero -> OCT .
 
-    LT              reduce using rule 20 (numero -> OCT .)
-    GT              reduce using rule 20 (numero -> OCT .)
-    EQ              reduce using rule 20 (numero -> OCT .)
-    LE              reduce using rule 20 (numero -> OCT .)
-    GE              reduce using rule 20 (numero -> OCT .)
-    COMA            reduce using rule 20 (numero -> OCT .)
-    LLAVEC          reduce using rule 20 (numero -> OCT .)
+    LT              reduce using rule 19 (numero -> OCT .)
+    GT              reduce using rule 19 (numero -> OCT .)
+    EQ              reduce using rule 19 (numero -> OCT .)
+    LE              reduce using rule 19 (numero -> OCT .)
+    GE              reduce using rule 19 (numero -> OCT .)
+    COMA            reduce using rule 19 (numero -> OCT .)
+    LLAVEC          reduce using rule 19 (numero -> OCT .)
 
 
 state 26
 
-    (21) numero -> HEX .
+    (20) numero -> HEX .
 
-    LT              reduce using rule 21 (numero -> HEX .)
-    GT              reduce using rule 21 (numero -> HEX .)
-    EQ              reduce using rule 21 (numero -> HEX .)
-    LE              reduce using rule 21 (numero -> HEX .)
-    GE              reduce using rule 21 (numero -> HEX .)
-    COMA            reduce using rule 21 (numero -> HEX .)
-    LLAVEC          reduce using rule 21 (numero -> HEX .)
+    LT              reduce using rule 20 (numero -> HEX .)
+    GT              reduce using rule 20 (numero -> HEX .)
+    EQ              reduce using rule 20 (numero -> HEX .)
+    LE              reduce using rule 20 (numero -> HEX .)
+    GE              reduce using rule 20 (numero -> HEX .)
+    COMA            reduce using rule 20 (numero -> HEX .)
+    LLAVEC          reduce using rule 20 (numero -> HEX .)
 
 
 state 27
@@ -419,27 +414,32 @@ state 27
 
 state 28
 
-    (8) asignacion -> CADENASIN PUNTOS axioma .
-    (15) valor -> axioma .
+    (21) comparacion -> numero LT . numero
+    (15) numero -> . INT
+    (16) numero -> . REAL
+    (17) numero -> . NCIENT
+    (18) numero -> . BIN
+    (19) numero -> . OCT
+    (20) numero -> . HEX
 
-  ! reduce/reduce conflict for COMA resolved using rule 8 (asignacion -> CADENASIN PUNTOS axioma .)
-  ! reduce/reduce conflict for LLAVEC resolved using rule 8 (asignacion -> CADENASIN PUNTOS axioma .)
-    COMA            reduce using rule 8 (asignacion -> CADENASIN PUNTOS axioma .)
-    LLAVEC          reduce using rule 8 (asignacion -> CADENASIN PUNTOS axioma .)
+    INT             shift and go to state 21
+    REAL            shift and go to state 22
+    NCIENT          shift and go to state 23
+    BIN             shift and go to state 24
+    OCT             shift and go to state 25
+    HEX             shift and go to state 26
 
-  ! COMA            [ reduce using rule 15 (valor -> axioma .) ]
-  ! LLAVEC          [ reduce using rule 15 (valor -> axioma .) ]
-
+    numero                         shift and go to state 33
 
 state 29
 
-    (22) comparacion -> numero LT . numero
-    (16) numero -> . INT
-    (17) numero -> . REAL
-    (18) numero -> . NCIENT
-    (19) numero -> . BIN
-    (20) numero -> . OCT
-    (21) numero -> . HEX
+    (22) comparacion -> numero GT . numero
+    (15) numero -> . INT
+    (16) numero -> . REAL
+    (17) numero -> . NCIENT
+    (18) numero -> . BIN
+    (19) numero -> . OCT
+    (20) numero -> . HEX
 
     INT             shift and go to state 21
     REAL            shift and go to state 22
@@ -452,13 +452,13 @@ state 29
 
 state 30
 
-    (23) comparacion -> numero GT . numero
-    (16) numero -> . INT
-    (17) numero -> . REAL
-    (18) numero -> . NCIENT
-    (19) numero -> . BIN
-    (20) numero -> . OCT
-    (21) numero -> . HEX
+    (23) comparacion -> numero EQ . numero
+    (15) numero -> . INT
+    (16) numero -> . REAL
+    (17) numero -> . NCIENT
+    (18) numero -> . BIN
+    (19) numero -> . OCT
+    (20) numero -> . HEX
 
     INT             shift and go to state 21
     REAL            shift and go to state 22
@@ -471,13 +471,13 @@ state 30
 
 state 31
 
-    (24) comparacion -> numero EQ . numero
-    (16) numero -> . INT
-    (17) numero -> . REAL
-    (18) numero -> . NCIENT
-    (19) numero -> . BIN
-    (20) numero -> . OCT
-    (21) numero -> . HEX
+    (24) comparacion -> numero LE . numero
+    (15) numero -> . INT
+    (16) numero -> . REAL
+    (17) numero -> . NCIENT
+    (18) numero -> . BIN
+    (19) numero -> . OCT
+    (20) numero -> . HEX
 
     INT             shift and go to state 21
     REAL            shift and go to state 22
@@ -490,13 +490,13 @@ state 31
 
 state 32
 
-    (25) comparacion -> numero LE . numero
-    (16) numero -> . INT
-    (17) numero -> . REAL
-    (18) numero -> . NCIENT
-    (19) numero -> . BIN
-    (20) numero -> . OCT
-    (21) numero -> . HEX
+    (25) comparacion -> numero GE . numero
+    (15) numero -> . INT
+    (16) numero -> . REAL
+    (17) numero -> . NCIENT
+    (18) numero -> . BIN
+    (19) numero -> . OCT
+    (20) numero -> . HEX
 
     INT             shift and go to state 21
     REAL            shift and go to state 22
@@ -509,64 +509,40 @@ state 32
 
 state 33
 
-    (26) comparacion -> numero GE . numero
-    (16) numero -> . INT
-    (17) numero -> . REAL
-    (18) numero -> . NCIENT
-    (19) numero -> . BIN
-    (20) numero -> . OCT
-    (21) numero -> . HEX
+    (21) comparacion -> numero LT numero .
 
-    INT             shift and go to state 21
-    REAL            shift and go to state 22
-    NCIENT          shift and go to state 23
-    BIN             shift and go to state 24
-    OCT             shift and go to state 25
-    HEX             shift and go to state 26
+    COMA            reduce using rule 21 (comparacion -> numero LT numero .)
+    LLAVEC          reduce using rule 21 (comparacion -> numero LT numero .)
 
-    numero                         shift and go to state 38
 
 state 34
 
-    (22) comparacion -> numero LT numero .
+    (22) comparacion -> numero GT numero .
 
-    COMA            reduce using rule 22 (comparacion -> numero LT numero .)
-    LLAVEC          reduce using rule 22 (comparacion -> numero LT numero .)
+    COMA            reduce using rule 22 (comparacion -> numero GT numero .)
+    LLAVEC          reduce using rule 22 (comparacion -> numero GT numero .)
 
 
 state 35
 
-    (23) comparacion -> numero GT numero .
+    (23) comparacion -> numero EQ numero .
 
-    COMA            reduce using rule 23 (comparacion -> numero GT numero .)
-    LLAVEC          reduce using rule 23 (comparacion -> numero GT numero .)
+    COMA            reduce using rule 23 (comparacion -> numero EQ numero .)
+    LLAVEC          reduce using rule 23 (comparacion -> numero EQ numero .)
 
 
 state 36
 
-    (24) comparacion -> numero EQ numero .
+    (24) comparacion -> numero LE numero .
 
-    COMA            reduce using rule 24 (comparacion -> numero EQ numero .)
-    LLAVEC          reduce using rule 24 (comparacion -> numero EQ numero .)
+    COMA            reduce using rule 24 (comparacion -> numero LE numero .)
+    LLAVEC          reduce using rule 24 (comparacion -> numero LE numero .)
 
 
 state 37
 
-    (25) comparacion -> numero LE numero .
+    (25) comparacion -> numero GE numero .
 
-    COMA            reduce using rule 25 (comparacion -> numero LE numero .)
-    LLAVEC          reduce using rule 25 (comparacion -> numero LE numero .)
+    COMA            reduce using rule 25 (comparacion -> numero GE numero .)
+    LLAVEC          reduce using rule 25 (comparacion -> numero GE numero .)
 
-
-state 38
-
-    (26) comparacion -> numero GE numero .
-
-    COMA            reduce using rule 26 (comparacion -> numero GE numero .)
-    LLAVEC          reduce using rule 26 (comparacion -> numero GE numero .)
-
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: reduce/reduce conflict in state 28 resolved using rule (asignacion -> CADENASIN PUNTOS axioma)
-WARNING: rejected rule (valor -> axioma) in state 28

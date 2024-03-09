@@ -1,12 +1,11 @@
-{
-    "Hola mundo" : {},
-    hola : 2,
-    "gigo": {
-            "clave_vacia" : ""
-    },
-    kilo : NULL,
-    _Que_tal : TR,
-    vei20 : 15 < 100,
-    sii : "TU",
-    "hjsd": fl
+{ 
+    clave_vacia: {},
+    clave_numero: 10,
+    clave_cadena_caracteres: "string",
+    clave_booleano: TR,
+    clave_valor_nulo: NULL,
+    clave_op_comp: 10 > 11,
+    calve_anidada: {
+        "clave con comillas": "",
+    }
 }

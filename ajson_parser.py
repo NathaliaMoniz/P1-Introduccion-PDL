@@ -37,8 +37,7 @@ class ParserClass:
 
     def p_asignacion(self, p):
         ''' asignacion : CADENACON PUNTOS valor
-                       | CADENASIN PUNTOS valor
-                       | CADENASIN PUNTOS axioma '''
+                       | CADENASIN PUNTOS valor '''
         p[0] = {p[1] : p[3]}
         
 
@@ -52,7 +51,6 @@ class ParserClass:
                 | axioma'''
         p[0] = p[1]
        
-    
     def p_numero(self, p):
         '''numero : INT
                 | REAL
@@ -80,7 +78,6 @@ class ParserClass:
         elif p[2] == ">=":
             p[0] = (p[1] >= p[3])
         
-
     def p_error(self, p):
         if p.value: 
             print("[Syntax Error] At value ", p.value)
@@ -92,6 +89,12 @@ class ParserClass:
     
     def imprimir_anidado(self, dic, clave_previa=''):
         for clave, valor in dic.items():
+            if valor == "NULL":
+                valor = None
+            if valor == "TR" or valor == "tr":
+                valor = True
+            if valor == "FL" or valor == "fl":
+                valor = False
             if clave_previa:
                 nueva_clave = clave_previa + '.' + clave
             else:

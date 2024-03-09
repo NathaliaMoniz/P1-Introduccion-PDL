@@ -1,7 +1,17 @@
-{
-    
-
-
-
-    
+{ 
+    clave_vacia: {},
+    clave_numero: 10,
+    clave_cadena_caracteres: "string",
+    clave_booleano: TR,
+    clave_valor_nulo: NULL,
+    clave_op_comp: 10 > 11,
+    calve_anidada: {
+        "clave_con_comillas_anidada": {
+            clave_anidada_2: {
+                clave_anidada_3: {
+                    clave_4 : "",
+                },
+            },
+        },
+    }
 }

@@ -1,16 +1,8 @@
 { 
-    clave_vacia: {},
-    clave_numero: 10,
-    clave_cadena_caracteres: "string" ,
-    clave_booleano: TR,
-    clave_valor_nulo: NULL,
-    clave_op_comp: 10 > 11,
-    camilo_triana: {
-        peras_con_mani: {
-            jkoj: {
-                skjfd: 34,
-            },
-        },
-    },
-    hkj: 45
+    _comparacion_int: 1 >= 35,
+    comparacion_hex_5: 0xFF >= 0b111011,
+    _comparacion_cient: 1e-1 == 0.1,
+    comp_bin: 010 < 110,
+    comparacion_real: .12 > .09,
+    comp: 077 < 63
 }
