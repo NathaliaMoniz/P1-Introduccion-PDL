@@ -1,0 +1,8 @@
+{ 
+    _comparacion_int: 1 >= 35,
+    comparacion_hex_5: 0xFF >= 0b111011,
+    _comparacion_cient: 1e-1 == 0.1
+    comp_bin: 010 < 110,
+    comparacion_real: .12 > .09,
+    comp: 077 < 63
+}
