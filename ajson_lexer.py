@@ -56,7 +56,7 @@ class LexerClass:
     t_COMA = r','
 
     def t_REAL(self, t):
-        r'-?\d*\.\d+'
+        r'-?\d*\.\d*'
         t.value = float(t.value)
         return t
 
@@ -66,7 +66,7 @@ class LexerClass:
         return t
 
     def t_BIN(self, t):
-        r'(0b|OB)[01]+'
+        r'0[][01]+'
         t.value = int(t.value, 2)
         return t
 
@@ -93,6 +93,7 @@ class LexerClass:
     def t_CADENASIN(self, t):
         r'[a-zA-Z_][a-zA-Z0-9_]*'
         t.type = self.reserved_map.get(t.value, "CADENASIN")
+        
         return t
 
     def t_error(self, token):
